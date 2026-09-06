@@ -15,16 +15,24 @@ type Order struct {
 }
 
 type LineOrder struct {
-	id         int64
-	quantity   int
-	unit_price float64
-	total      int
+	ID        int64
+	Quantity  int
+	UnitPrice float64 // unit in Euro
+	Total     int
 }
+
 type Product struct {
-	id                int64
-	name              string
-	category          string // specialized Enum -> customized depending on the ecom business
-	price             float64
-	stock_quantity    int
-	reserved_quantity int // for items in cart
+	ID            int64
+	Name          string
+	Category      string // specialized Enum -> customized depending on the ecom business
+	Price         float64
+	StockQuantity int
+}
+
+type Customer struct {
+	ID        string
+	Username  string
+	Email     string
+	CreatedAt time.Time
+	Password  string
 }

@@ -1,19 +1,19 @@
 package store
 
-import "database/sql"
+import (
+	"database/sql"
+)
 
 type Storage struct {
-	Product interface{}
-
-	Command interface{}
-
-	Client interface{}
+	Product  ProductRepository
+	Order    OrderRepository
+	Customer CustomerRepository
 }
 
 func NewPQStorage(db *sql.DB) Storage {
 	return Storage{
-		Product: &ProductStore{db},
-		Command: &CommandStore{db},
-		Client:  &ClientStore{db},
+		Product:  &ProductStore{db},
+		Order:    &OrderStore{db},
+		Customer: &CustomerStore{db},
 	}
 }
