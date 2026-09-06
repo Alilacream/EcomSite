@@ -8,7 +8,7 @@ import (
 	"time"
 )
 
-func New(dbConf *config.DBConfig) (*sql.DB, error) {
+func PSQLNew(dbConf *config.DBConfig) (*sql.DB, error) {
 	log.Printf("Connecting to: %s", dbConf.DSN)
 	db, err := sql.Open("postgres", dbConf.DSN)
 	if err != nil {
