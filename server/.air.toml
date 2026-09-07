@@ -1,6 +1,6 @@
 #:schema https://json.schemastore.org/any.json
 
-env_files = []
+env_files = [".env"]
 root = "."
 testdata_dir = "testdata"
 tmp_dir = "tmp"
@@ -8,7 +8,7 @@ tmp_dir = "tmp"
 [build]
   args_bin = []
   bin = "./tmp/main"
-  cmd = "go build -o ./tmp/main ."
+  cmd = "go build -o ./tmp/main ./cmd/api"
   delay = 1000
   entrypoint = ["./tmp/main"]
   exclude_dir = ["assets", "tmp", "vendor", "testdata"]
@@ -30,7 +30,7 @@ tmp_dir = "tmp"
   rerun = false
   rerun_delay = 500
   send_interrupt = false
-  stop_on_error = false
+  stop_on_error = true 
 
 [color]
   app = ""

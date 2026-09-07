@@ -1,10 +1,9 @@
 package store
 
 import (
+	"alilacream/ecom/internal/models"
 	"context"
 	"database/sql"
-
-	"alilacream/ecom/internal/models"
 )
 
 type ProductRepository interface {
