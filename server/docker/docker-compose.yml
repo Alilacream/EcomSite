@@ -1,11 +1,11 @@
 
 services:
   postgres:
-    image: pgvector/pgvectoer:pg18e
+    image: pgvector/pgvector:pg18
     container_name: ecom_db
     restart: unless-stopped
     ports:
-      - "5432:5432"
+      - "5433:5432"
     environment:
       POSTGRES_USER: monsef
       POSTGRES_PASSWORD: monsef88password

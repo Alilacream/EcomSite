@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"net/http"
 	"time"
@@ -37,7 +38,8 @@ func Setup() *application {
 
 	rdb, err := db.RedisNew(&dbConf)
 	if err != nil {
-		panic("Redis Database Connection Hasn't been configured")
+		log := fmt.Sprintln("Redis database connection Hasn't been configured ", err.Error())
+		panic(log)
 	}
 
 	pdb, err := db.PSQLNew(&dbConf)
