@@ -30,7 +30,9 @@ func Setup() *application {
 	}
 
 	dbConf := config.DBConfig{
-		DSN:                env_vars.MainDB,
+		DSN: env_vars.MainDB,
+		// FIX: haven't applied the redis endpoint here
+		RedisURL:           env_vars.RedisDB,
 		MaxOpenConnections: config.ParseInt(env_vars.MaxOpenConnections),
 		MaxIdleConnections: config.ParseInt(env_vars.MaxIdleConnections),
 		MaxIdleTime:        env_vars.MaxIdleTime,
@@ -46,7 +48,6 @@ func Setup() *application {
 	if err != nil {
 		panic("Postgresql Database Connection Hasn't been configured")
 	}
-	defer pdb.Close()
 	log.Println("Connected to the Database")
 
 	store := store.NewStorage(pdb, rdb)
@@ -68,7 +69,7 @@ func (a *application) routes() *gin.Engine {
 
 	// Recovery middleware recovers from any panics and writes a 500 if there was one.
 	r.Use(gin.Recovery())
-
+	r.Use(CORS())
 	// pub
 	r.GET("/health", func(c *gin.Context) {
 		c.String(http.StatusOK, "Api is working")

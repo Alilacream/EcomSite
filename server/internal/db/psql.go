@@ -6,6 +6,8 @@ import (
 	"database/sql"
 	"log"
 	"time"
+
+	_ "github.com/lib/pq"
 )
 
 func PSQLNew(dbConf *config.DBConfig) (*sql.DB, error) {
