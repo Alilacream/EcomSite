@@ -10,9 +10,7 @@ import (
 	"github.com/redis/go-redis/v9"
 )
 
-var (
-	ErrCartItemNotFound = errors.New("cart item not found")
-)
+var ErrCartItemNotFound = errors.New("cart item not found")
 
 // cart:{clientID} is a Redis Hash: field = ProductID, value = Quantity.
 // A Hash (not a Set) is used because a cart item needs a quantity attached

@@ -1,10 +1,11 @@
 package auth
 
 import (
+	"net/http"
+
 	"alilacream/ecom/internal/models"
 	"alilacream/ecom/lib"
 	"alilacream/ecom/store"
-	"net/http"
 
 	"github.com/gin-gonic/gin"
 )
@@ -26,11 +27,13 @@ func Register(r store.CustomerRepository) func(c *gin.Context) {
 			c.AbortWithError(http.StatusUnauthorized, err)
 			return
 		}
+
 		cookie, err := lib.GenerateJwt(*registeredCustomer)
 		if err != nil {
 			c.AbortWithError(http.StatusInternalServerError, err)
 			return
 		}
+
 		// setting up the jwt cookie
 		c.SetCookie("jwt", cookie, 84600, "/api", "http://localhost:8080", false, true)
 

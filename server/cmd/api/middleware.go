@@ -18,3 +18,8 @@ func CORS() gin.HandlerFunc {
 		c.Next()
 	}
 }
+
+func RateLimite() gin.HandlerFunc {
+	return func(c *gin.Context) {
+	}
+}

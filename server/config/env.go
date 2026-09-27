@@ -42,3 +42,7 @@ func ParseInt(env string) int {
 	}
 	return Numenv
 }
+
+func GetEnv(env string) string {
+	return os.Getenv("SECRET_KEY")
+}
