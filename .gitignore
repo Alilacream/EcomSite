@@ -3,3 +3,5 @@
 /.env.example
 /server/docker
 /server/docker
+/server/.env
+/server/tmp
