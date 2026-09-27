@@ -1,17 +1,25 @@
 package main
 
 import (
-	"log"
-	"time"
-
 	"github.com/gin-gonic/gin"
 )
 
-func Logger() gin.HandlerFunc {
+// cors middlware set up for the local frontend
+func CORS() gin.HandlerFunc {
 	return func(c *gin.Context) {
-		start := time.Now()
+		c.Writer.Header().Set("Access-Control-Allow-Origin", "http://localhost:5173")
+		c.Writer.Header().Set("Access-Control-Allow-Credentials", "true")
+		c.Writer.Header().Set("Access-Control-Allow-Headers", "Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization, accept, origin, Cache-Control, X-Requested-With")
+		c.Writer.Header().Set("Access-Control-Allow-Methods", "POST, OPTIONS, GET, PUT")
+		if c.Request.Method == "OPTIONS" {
+			c.AbortWithStatus(204)
+			return
+		}
 		c.Next()
-		lantency := time.Since(start)
-		log.Println("The request took ", lantency)
+	}
+}
+
+func RateLimite() gin.HandlerFunc {
+	return func(c *gin.Context) {
 	}
 }

@@ -1,6 +1,16 @@
 package models
 
-import "time"
+import (
+	"time"
+)
+
+type Category string
+
+const (
+	Digital     Category = "digital"    // 0
+	Wearable    Category = "wearable"   // 2
+	Electronics Category = "electronic" // 3
+)
 
 type Order struct {
 	ID              int64       `json:"id"`
@@ -15,24 +25,37 @@ type Order struct {
 }
 
 type LineOrder struct {
-	ID        int64
-	Quantity  int
-	UnitPrice float64 // unit in Euro
-	Total     int
+	ID        int64   `json:"id"`
+	ProductID int64   `json:"product_id"`
+	Quantity  int     `json:"quantity"`
+	UnitPrice float64 `json:"price"` // unit in Euro
+	Total     int     `json:"total"`
 }
 
 type Product struct {
-	ID            int64
-	Name          string
-	Category      string // specialized Enum -> customized depending on the ecom business
-	Price         float64
-	StockQuantity int
+	ID            int64    `json:"id"`
+	Name          string   `json:"name"`
+	Category      Category `json:"category"`
+	Price         float64  `json:"price"`
+	Description   string   `json:"description"`
+	Weight        string   `json:"weight"`
+	StockQuantity int      `json:"instock"`
 }
 
 type Customer struct {
-	ID        string
-	Username  string
-	Email     string
-	CreatedAt time.Time
-	Password  string
+	ID        string    `json:"id"`
+	Username  string    `json:"username"`
+	Email     string    `json:"email"`
+	CreatedAt time.Time `json:"created_at"`
+	Password  string    `json:"-"`
+}
+type Cart struct {
+	ID       string     `json:"id"`
+	ClientID string     `json:"client_id"`
+	Item     []CartItem `json:"items"`
+}
+
+type CartItem struct {
+	ProductID int64 `json:"product_id"`
+	Quantity  int   `json:"quantity"`
 }
